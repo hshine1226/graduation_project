@@ -18,6 +18,7 @@ except:
 
 blescan.hci_le_set_scan_parameters(sock)
 blescan.hci_enable_le_scan(sock)
+door_sensor = "ac:9a:22:9b:02:32"
 
 while True:
 	
@@ -25,8 +26,8 @@ while True:
 	#print "----------"
 	for beacon in returnedList:
 		#print beacon
-		if str(beacon) == "ac:9a:22:9b:02:32" :
-                    print("door sensor dectection00")
+		if str(beacon) == door_sensor:
+                    print("door sensor dectection")
                     
             
 	

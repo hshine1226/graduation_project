@@ -173,7 +173,7 @@ def parse_events(sock, loop_count=100):
 		    Adstring += ","
 		    Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
 		    
-		    # Door
+		    # Door sensor MAC주소 저장
 		    Daddr = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 		    myFullList.append(Daddr)
 
