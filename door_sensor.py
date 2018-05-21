@@ -1,5 +1,6 @@
 # test BLE Scanning software
 # jcs 6/8/2014
+# doorsensor
 
 import blescan
 import sys
@@ -25,7 +26,7 @@ while True:
 	for beacon in returnedList:
 		#print beacon
 		if str(beacon) == "ac:9a:22:9b:02:32" :
-                    print("door sensor dectection")
+                    print("door sensor dectection00")
                     
             
 	
