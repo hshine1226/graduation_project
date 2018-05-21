@@ -1,0 +1,8 @@
+http://emflant.tistory.com/123
+
+git add 파일이름.확장자
+
+git commit -m "메시지"
+
+git push origin master
+
