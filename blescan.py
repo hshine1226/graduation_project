@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 # BLE iBeaconScanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
 # JCS 06/07/14
 

@@ -1,6 +1,9 @@
+#-*- coding: utf-8 -*-
 # test BLE Scanning software
 # jcs 6/8/2014
 # doorsensor
+
+#hciconfig hci0 up!!!!!!
 
 import blescan
 import sys
@@ -18,7 +21,7 @@ except:
 
 blescan.hci_le_set_scan_parameters(sock)
 blescan.hci_enable_le_scan(sock)
-door_sensor = "ac:9a:22:9b:02:32"
+door_sensor = "ac:9a:22:9b:02:61"
 
 while True:
 	
