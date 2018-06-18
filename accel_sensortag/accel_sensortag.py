@@ -1,6 +1,9 @@
 from btle import UUID, Peripheral, DefaultDelegate, AssignedNumbers
 import struct
 import math
+#import sys
+
+f = open('data.txt', 'w')
 
 def _TI_UUID(val):
     return UUID("%08X-0451-4000-b000-000000000000" % (0xF0000000+val))
@@ -227,6 +230,8 @@ def main():
     time.sleep(1.0)
 
     counter=1
+
+
     while True:
        if arg.accelerometer or arg.all:
            #print("Accelerometer: ", tag.accelerometer.read())
@@ -237,7 +242,19 @@ def main():
            x = c[0]
            y = c[1]
            z = c[2]
-           print("x : "+x+" y : "+y+" z : "+z)
+           
+           if(abs(float(z)) > 6):
+               print("Dangerous")
+               
+           try:
+               #print("x : "+x+" y : "+y+" z : "+z)
+               f.write(z+"\n")
+           except KeyboardInterrupt:
+               f.close()
+        
+           # file RW
+           #f.write("x : "+x+" y : "+y+" z : "+z +"\n")
+           #f.close()
        if arg.gyroscope or arg.all:
            print("Gyroscope: ", tag.gyroscope.read())
        if arg.battery or arg.all:
@@ -250,6 +267,6 @@ def main():
     tag.disconnect()
     del tag
 
-if __name__ == "__main__":
+if __name__ == "__main__":    
     main()
 
