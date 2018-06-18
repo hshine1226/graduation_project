@@ -11,6 +11,7 @@ import binascii
 import select
 import struct
 import signal
+import sys, errno
 
 def preexec_function():
     # Ignore the SIGINT signal by setting the handler to the standard
@@ -770,6 +771,7 @@ if __name__ == '__main__':
                         print("    ->", repr(ch.read()))
                     except BTLEException as e:
                         print("    ->", e)
+
 
     finally:
         conn.disconnect()
