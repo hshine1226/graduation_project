@@ -6,3 +6,10 @@ git commit -m "메시지"
 
 git push origin master
 
+내려받기
+git pull
+
+
+
+3g dongle sms sending
+https://escapologybb.com/send-sms-from-raspberry-pi/
