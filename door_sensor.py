@@ -3,7 +3,8 @@
 # jcs 6/8/2014
 # doorsensor
 
-#hciconfig hci0 up!!!!!!
+# hciconfig
+#sudo hciconfig hci0 up!!!!!!
 
 import blescan
 import sys
