@@ -8,6 +8,7 @@
 
 import blescan
 import sys
+import time
 
 import bluetooth._bluetooth as bluez
 
@@ -26,14 +27,10 @@ door_sensor = "ac:9a:22:9b:02:61"
 
 while True:
 	
-	returnedList = blescan.parse_events(sock, 10)
+	returnedList = blescan.parse_events(sock, 1)
 	#print "----------"
 	for beacon in returnedList:
 		#print beacon
 		if str(beacon) == door_sensor:
                     print("door sensor dectection")
-                    
-            
-	
-		
-
+                    time.sleep(1)
