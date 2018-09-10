@@ -7,7 +7,7 @@ git commit -m "메시지"
 git push origin master
 
 내려받기
-git pull
+git pull origin master
 
 
 
@@ -36,3 +36,11 @@ sudo gammu-config   =>  /dev/ttyUSB0
 sudo gammu --identify
 
 echo "test" | sudo gammu sendsms TEXT 01073205117
+
+
+
+doorsensor
+
+sudo apt-get install python-bluez
+# hciconfig
+#sudo hciconfig hci0 up!!!!!!

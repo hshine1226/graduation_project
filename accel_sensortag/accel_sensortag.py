@@ -1,6 +1,8 @@
+#-*- coding: utf-8 -*-
 from btle import UUID, Peripheral, DefaultDelegate, AssignedNumbers
 import struct
 import math
+import os
 #import sys
 
 f = open('data.txt', 'w')
@@ -231,8 +233,11 @@ def main():
 
     counter=1
 
-
+    cnt=0
     while True:
+       if cnt==0:
+           print("Connect")
+       cnt=1
        if arg.accelerometer or arg.all:
            #print("Accelerometer: ", tag.accelerometer.read())
            info =str(tag.accelerometer.read())
@@ -243,8 +248,9 @@ def main():
            y = c[1]
            z = c[2]
            
-           if(abs(float(z)) > 6):
-               print("Dangerous")
+           if(abs(float(z)) > 1.5):
+               print("Windows Broken!!!!!!")
+               os.system('gammu sendsms TEXT 01073205117 -unicode -text "[SOS]\n창문이 파손되었습니다.\n주소 : 한국기술교육대학교\n2공학관 119호"')
                
            try:
                #print("x : "+x+" y : "+y+" z : "+z)
