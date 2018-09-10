@@ -1,0 +1,46 @@
+http://emflant.tistory.com/123
+
+git add 파일이름.확장자
+
+git commit -m "메시지"
+
+git push origin master
+
+내려받기
+git pull
+
+
+
+3g dongle sms sending
+https://escapologybb.com/send-sms-from-raspberry-pi/
+
+
+sudo apt-get install usb-modeswitch
+
+sudo stty -F /dev/ttyUSB0 9600
+
+https://www.youtube.com/watch?v=IecMnLE-w-U
+
+sudo usb_modeswitch -v 0x12d1 -p 0x1f01 -V 0x12d1 -P 0x1f01 -m "0x01" -M "55534243000000000000000000000011060000000000000000000000000000"
+
+sudo chmod -R a+rwx /dev/ttyUSB0
+
+sudo systemctl stop ModemManager.service
+
+sudo stty -F /dev/ttyUSB0 9600
+
+sudo apt-get install gammu
+
+sudo gammu-config   =>  /dev/ttyUSB0
+
+sudo gammu --identify
+
+echo "test" | sudo gammu sendsms TEXT 01073205117
+
+
+
+doorsensor
+
+sudo apt-get install python-bluez
+# hciconfig
+#sudo hciconfig hci0 up!!!!!!
