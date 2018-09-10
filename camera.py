@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 from picamera import PiCamera
+import time
 from time import sleep
 import datetime
 
@@ -12,15 +13,16 @@ GPIO.setup(PIR_PIN1, GPIO.IN)
  
 try:     
     while True:
-      if (!GPIO.input(PIR_PIN1)):    
-        print "FC-51 Detect"
-        camera.start_preview()
-        sleep(2)
-        now = time.localtime()
-        camera.capture('/home/pi/'+now+'image.jpg')
-        camera.stop_preview()
-        time.sleep(5)
+        if (GPIO.input(PIR_PIN1) == 0):
+            print "FC-51 Detect"
+            camera.start_preview()
+            sleep(2)
+            now = datetime.datetime.now()
+            nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
+            camera.capture('/home/pi/'+nowDatetime+'image.jpg')
+            camera.stop_preview()
+            time.sleep(5)
  
 except KeyboardInterrupt:
-    print “ Quit”
+    print "Quit"
     GPIO.cleanup()

@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 import RPi.GPIO as GPIO
 from picamera import PiCamera
 from time import sleep
@@ -17,12 +18,14 @@ try:
     while True:
         if GPIO.input(PIR_PIN1):
             print "Motion Sensor1 Detect"
+            sleep(0.5)
             if GPIO.input(PIR_PIN2):
-            	print "Motion Sensor2 Detect"      
-		print "창문 침입이 감지되었습니다."
+                print "Motion Sensor2 Detect"      
+		print "Help~~"
+		sleep(0.1)
+		
 		#os.system('gammu sendsms TEXT 01073205117 -unicode -text "[SOS]\n도어락이 파손되었습니다.\n주소 : 한국기술교육대학교\n2공학관 119호"')
-        time.sleep(0.05)
  
 except KeyboardInterrupt:
-    print “ Quit”
+    print "Quit"
     GPIO.cleanup()
