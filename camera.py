@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 import RPi.GPIO as GPIO
 from picamera import PiCamera
 import time
@@ -19,7 +20,7 @@ try:
             sleep(2)
             now = datetime.datetime.now()
             nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
-            camera.capture('/home/pi/'+nowDatetime+'image.jpg')
+            camera.capture('/home/pi/'+nowDatetime+'.jpg')
             camera.stop_preview()
             time.sleep(5)
  
