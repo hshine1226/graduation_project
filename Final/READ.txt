@@ -11,3 +11,5 @@ hciconfig
 sudo hciconfig hci0 up
 sudo python doorlock.py
 ******************************************************
+
+python accel_sensortag.py B0:B4:48:BC:C7:85 -A -t 0.1

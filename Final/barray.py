@@ -10,6 +10,7 @@ import sys
 from socket import *
 import SocketServer
 from os.path import exists
+import time
 
 ECHO_PORT = 50000 + 7
 BUFSIZE = 1024
@@ -46,18 +47,23 @@ def server():
         s.sendto(data, addr)
         
         if data == "Photo":
-            with open('/home/pi/Documents/Final/' + data + '.jpg', 'wb') as f:
-                try:
-                    print('asd')
-                    while  img:
-                        f.write(img)
-                        data_transferred += len(img)
-                        img = s.recv(1024)
-                        print('d')
-                except Exception as e:
-                    print(e)
- 
-            print('파일[%s] 전송종료. 전송량 [%d]' %(filename+'.jpg', data_transferred))
+            buf = 1024
+            f = open('Photo.jpg', 'rb')
+            image = f.read(buf)
+            while(1):
+                if image:
+                    print 'Sending...'
+                    s.sendto(image, addr)
+                    image = f.read(buf)
+                else:
+                    print 'Done sending'
+                    break
+            time.sleep(0.5)
+            f.close()
+            print 'file closing complete'
+            
+            elif data == "sensor":
+                
             
 
 def client():
