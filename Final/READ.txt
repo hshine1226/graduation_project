@@ -1,0 +1,13 @@
+ssh 연결 안될 때
+sudo apt-get remove openssh-client openssh-server
+sudo apt-get install openssh-client openssh-server
+
+======================================================
+
+도어락(카메라, 마그네틱)
+적외선 센서 PIN = 3
+
+hciconfig
+sudo hciconfig hci0 up
+sudo python doorlock.py
+******************************************************

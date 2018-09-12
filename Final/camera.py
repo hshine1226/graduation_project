@@ -20,7 +20,7 @@ try:
             sleep(2)
             now = datetime.datetime.now()
             nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
-            camera.capture('/home/pi/'+nowDatetime+'.jpg')
+            camera.capture('/home/pi/Documents/Final/photo/'+nowDatetime+'.jpg')
             camera.stop_preview()
             time.sleep(5)
  
