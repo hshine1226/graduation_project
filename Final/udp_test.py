@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 #! /usr/bin/env python
 
 # Client and server for udp (datagram) echo.
