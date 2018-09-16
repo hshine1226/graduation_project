@@ -248,9 +248,9 @@ def main():
            y = c[1]
            z = c[2]
            
-           if(abs(float(z)) > 1.5):
+           if(abs(float(z)) > 0.1):
                print("Windows Broken!!!!!!")
-               os.system('gammu sendsms TEXT 01073205117 -unicode -text "[SOS]\n창문이 파손되었습니다.\n주소 : 한국기술교육대학교\n2공학관 119호"')
+               os.system('gammu sendsms TEXT 01073205117 -unicode -textutf8 "[SOS]\n창문이 파손되었습니다.\n주소 : 한국기술교육대학교\n2공학관 119호"')
                
            try:
                #print("x : "+x+" y : "+y+" z : "+z)

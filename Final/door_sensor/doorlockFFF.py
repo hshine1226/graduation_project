@@ -10,6 +10,7 @@ import pyrebase
 import blescan
 import sys
 import time
+import socket
 import os
 import bluetooth._bluetooth as bluez
 import RPi.GPIO as GPIO
@@ -28,9 +29,19 @@ config={         #firebase config
 firebase = pyrebase.initialize_app(config)
 
 dev_id = 0
-
+isOpen = 1
 camera = PiCamera()
-camera.rotation = 180
+
+
+HOST=""
+PORT=8012
+BUFSIZE=1024
+ADDR=(HOST, PORT)
+tcpSersock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcpSersock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+tcpSersock.bind(ADDR)
+
+
 
 GPIO.setmode(GPIO.BCM)
 PIR_PIN1 = 3 #FC-51
@@ -44,10 +55,20 @@ try:
 except:
 	print "error accessing bluetooth device..."
     	sys.exit(1)
+    	
+
+
 
 blescan.hci_le_set_scan_parameters(sock)
 blescan.hci_enable_le_scan(sock)
 door_sensor = "ac:9a:22:9b:02:61"
+door_sensor2 = "ac:9a:22:9b:02:32"
+
+tcpSersock.listen(5)
+
+print 'waiting for connection...'
+tcpCliSock,addr = tcpSersock.accept()   # wait till get connected
+print 'connected'
 
 while True:
 	returnedList = blescan.parse_events(sock, 1)
@@ -57,10 +78,9 @@ while True:
 		if str(beacon) == door_sensor:
                     print("door sensor dectection")
                     os.system('gammu sendsms TEXT 01073205117 -unicode -textutf8 "[SOS]\n도어락이 파손되었습니다.\n주소 : 한국기술교육대학교\n2공학관 119호"')
-                    #time.sleep(1)
-                
+                    time.sleep(1)
                     camera.start_preview()
-                    #time.sleep(1)
+                    time.sleep(1)
                     nowDatetime = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
                     basename='video'
                     filename="_".join([basename, nowDatetime])
@@ -86,10 +106,27 @@ while True:
                     result = db.child("files").push(filename+".mpeg,"+fileUrl)
                     print("DB upload Complete!!!!")
                     
+                elif str(beacon) == door_sensor2:
+                    if(isOpen == 1):
+                        print("door Opened")
+                        #if(tcpCliSock.recv(BUFSIZE) == "signal"):
+                        tcpCliSock.send("o\n")
+                        #msg = tcpCliSock.recv(1)
+                        #print(tcpCliSock.recv(BUFSIZE))
+                        isOpen = -isOpen
+                        time.sleep(0.7)
+                    else :
+                        print("door Closed")
+                        #if(tcpCliSock.recv(BUFSIZE) == "signal"):
+                        tcpCliSock.send("c\n")
+                        #print(tcpCliSock.recv(BUFSIZE))
+                        isOpen = -isOpen
+                        time.sleep(0.7)
+                    
                 if (GPIO.input(PIR_PIN1) == 0):
                     print "FC-51 Detect"
                     camera.start_preview()
-                    #time.sleep(1)
+                    time.sleep(2)
                     now = datetime.datetime.now()
                     nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
                     basename='photo'
@@ -112,5 +149,5 @@ while True:
                     result = db.child("photo").push(filename+".png,"+fileUrl)
                     print("DB upload Complete!!!!")
                     
-                    #time.sleep(1)
+                    time.sleep(5)
                     

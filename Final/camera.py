@@ -17,7 +17,7 @@ try:
         if (GPIO.input(PIR_PIN1) == 0):
             print "FC-51 Detect"
             camera.start_preview()
-            sleep(2)
+            time.sleep(2)
             now = datetime.datetime.now()
             nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
             camera.capture('/home/pi/Documents/Final/photo/'+nowDatetime+'.jpg')

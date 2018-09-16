@@ -4,6 +4,7 @@ import struct
 import math
 import os
 import sys
+from flask import Flask, render_template, Response, request
 
 f = open('data.txt', 'w')
 
@@ -250,11 +251,16 @@ def main():
            
            if(abs(float(z)) > 0.5):
                print("Windows Broken!!!!!!")
-               os.system('gammu sendsms TEXT 01073205117 -unicode -text "[SOS]\n창문이 파손되었습니다.\n주소 : 한국기술교육대학교\n2공학관 119호"')
+               #os.system('gammu sendsms TEXT 01073205117 -unicode -text "[SOS]\n창문이 파손되었습니다.\n주소 : 한국기술교육대학교\n2공학관 119호"')
                
            try:
                print("x : "+x+" y : "+y+" z : "+z)
                f.write(z+"\n")
+               #####
+               #accel_data = {'x': x, 'y':y, 'z':z}
+               #requests.post("218.150.183.48:5000/accel", data=accel_data)
+               ######
+               
            except KeyboardInterrupt:
                f.close()
         
